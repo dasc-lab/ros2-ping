@@ -23,8 +23,8 @@ public:
 
     ping_publisher_ =
         this->create_publisher<builtin_interfaces::msg::Time>("ping", 10);
-    rt_publisher_ =
-        this->create_publisher<builtin_interfaces::msg::Time>("ping", 10);
+    rt_publisher_ = this->create_publisher<builtin_interfaces::msg::Duration>(
+        "round_trip", 10);
     timer_ =
         this->create_wall_timer(500ms, std::bind(&Ping::timer_callback, this));
   }
@@ -56,7 +56,7 @@ private:
 
       rt_publisher_->publish(to_msg(round_trip_ns));
 
-      RCLCPP_INFO(get_logger(), "Round Trip Delay: %f ms", round_trip_ms);
+      RCLCPP_INFO(get_logger(), " ...round Trip Delay: %f ms", round_trip_ms);
     }
   }
 
@@ -69,7 +69,8 @@ private:
   }
 
   rclcpp::TimerBase::SharedPtr timer_;
-  rclcpp::Publisher<builtin_interfaces::msg::Time>::SharedPtr publisher_;
+  rclcpp::Publisher<builtin_interfaces::msg::Time>::SharedPtr ping_publisher_;
+  rclcpp::Publisher<builtin_interfaces::msg::Duration>::SharedPtr rt_publisher_;
   rclcpp::Subscription<builtin_interfaces::msg::Time>::SharedPtr subscriber_;
 };
 

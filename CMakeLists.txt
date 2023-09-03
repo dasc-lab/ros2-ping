@@ -13,14 +13,12 @@ find_package(rclcpp REQUIRED)
 add_executable(ping src/ping.cpp)
 ament_target_dependencies(ping 
   rclcpp
-  std_msgs
   builtin_interfaces
   )
 
 add_executable(pong src/pong.cpp)
 ament_target_dependencies(pong 
   rclcpp
-  std_msgs
   builtin_interfaces
 )
 

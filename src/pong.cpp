@@ -18,6 +18,8 @@ public:
 
     publisher_ =
         this->create_publisher<builtin_interfaces::msg::Time>("pong", 10);
+
+    RCLCPP_INFO(get_logger(), "waiting for ping msg...");
   }
 
 private:
