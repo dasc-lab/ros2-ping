@@ -6,7 +6,7 @@
 Clone the repo to your `colcon_ws`
 ```
 cd colcon_ws/src
-git clone <this repo>
+git clone https://github.com/dasc-lab/ros2-ping
 ```
 
 Build the workspace
@@ -15,7 +15,7 @@ cd colcon_ws
 colcon build
 ```
 
-Source the environment
+Source the workspace 
 ```
 source install/setup.bash
 ```
