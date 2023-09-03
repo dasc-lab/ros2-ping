@@ -56,7 +56,7 @@ private:
 
       rt_publisher_->publish(to_msg(round_trip_ns));
 
-      RCLCPP_INFO(get_logger(), " ...round Trip Delay: %f ms", round_trip_ms);
+      RCLCPP_INFO(get_logger(), " ...round trip delay: %f ms", round_trip_ms);
     }
   }
 
