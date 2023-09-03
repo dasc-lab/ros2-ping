@@ -1,7 +1,7 @@
 # ROS2 Ping
 
 
-# Installation
+## Installation
 
 Clone the repo to your `colcon_ws`
 ```
