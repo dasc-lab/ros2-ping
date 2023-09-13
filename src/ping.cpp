@@ -18,6 +18,9 @@ class Ping : public rclcpp::Node {
 public:
   Ping() : Node("ping") {
 
+    ping_rate_hz_ =
+        this->declare_parameter<double>("ping_rate_hz", ping_rate_hz_);
+
     subscriber_ = this->create_subscription<builtin_interfaces::msg::Time>(
         "pong", 10, std::bind(&Ping::pong_callback, this, _1));
 
@@ -25,8 +28,9 @@ public:
         this->create_publisher<builtin_interfaces::msg::Time>("ping", 10);
     rt_publisher_ = this->create_publisher<builtin_interfaces::msg::Duration>(
         "round_trip", 10);
-    timer_ =
-        this->create_wall_timer(500ms, std::bind(&Ping::timer_callback, this));
+    timer_ = this->create_wall_timer(
+        std::chrono::duration<double>(1.0 / ping_rate_hz_),
+        std::bind(&Ping::timer_callback, this));
   }
 
 private:
@@ -72,6 +76,7 @@ private:
   rclcpp::Publisher<builtin_interfaces::msg::Time>::SharedPtr ping_publisher_;
   rclcpp::Publisher<builtin_interfaces::msg::Duration>::SharedPtr rt_publisher_;
   rclcpp::Subscription<builtin_interfaces::msg::Time>::SharedPtr subscriber_;
+  double ping_rate_hz_ = 50.0;
 };
 
 int main(int argc, char **argv) {
