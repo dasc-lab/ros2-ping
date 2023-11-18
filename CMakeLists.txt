@@ -22,12 +22,19 @@ ament_target_dependencies(pong
   builtin_interfaces
 )
 
+add_executable(rt_listener src/rt_listener.cpp)
+ament_target_dependencies(rt_listener
+  rclcpp
+  builtin_interfaces
+)
+
 target_compile_features(ping PUBLIC c_std_99 cxx_std_17)  # Require C99 and C++17
 target_compile_features(pong PUBLIC c_std_99 cxx_std_17)  # Require C99 and C++17
 
 install(TARGETS 
   ping
   pong
+  rt_listener
   DESTINATION lib/${PROJECT_NAME})
 
 if(BUILD_TESTING)
